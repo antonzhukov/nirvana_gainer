@@ -32,9 +32,9 @@ func getMessageByTime(moscowTime time.Time) string {
 	currentTime := moscowTime.Format("15:04")
 
 	// Check if it's 19:37
-	if currentTime == SUNDAY_STARTS_TIME {
-		return "Sunday starts in 2 hours"
-	}
+	// if currentTime == SUNDAY_STARTS_TIME {
+	return "Sunday starts in 2 hours"
+	// }
 
 	// Check if it's 19:39
 	if currentTime == SUNDAY_OVER_TIME {

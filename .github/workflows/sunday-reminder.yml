@@ -5,7 +5,7 @@ on:
     # Run every Saturday at 22:00 Moscow time (UTC+3)
     # Cron format: minute hour day month day-of-week
     # Moscow time is UTC+3, so 22:00 Moscow = 19:00 UTC
-    - cron: '* * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
