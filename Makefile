@@ -1,7 +1,6 @@
-# Simple Makefile to run the bot using an env file and manage it as a daemon
+# Simple Makefile to run the bot and manage it as a daemon
 
 BIN := sunday-bot
-ENV_FILE ?= .env
 PID_FILE ?= sunday-bot.pid
 LOG_FILE ?= sunday-bot.log
 
@@ -13,16 +12,16 @@ build:
 	go build -o $(BIN) .
 
 run: build
-	@echo "[run] using env from $(ENV_FILE)"
-	@set -a; . $(ENV_FILE); set +a; ./$(BIN)
+	@echo "[run] using environment variables from shell"
+	@./$(BIN)
 
 start: build
-	@echo "[start] using env from $(ENV_FILE)"
+	@echo "[start] using environment variables from shell"
 	@if [ -f "$(PID_FILE)" ] && kill -0 $$(cat "$(PID_FILE)") 2>/dev/null; then \
 		echo "already running with PID $$(cat \"$(PID_FILE)\")"; \
 		exit 0; \
 	fi
-	@sh -c 'set -a; . $(ENV_FILE); set +a; nohup ./$(BIN) >> $(LOG_FILE) 2>&1 & echo $$! > $(PID_FILE)'
+	@nohup ./$(BIN) >> $(LOG_FILE) 2>&1 & echo $$! > $(PID_FILE)
 	@echo "started, PID $$(cat \"$(PID_FILE)\")"
 
 stop:
